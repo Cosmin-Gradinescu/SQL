@@ -1,23 +1,26 @@
 #I have used a pre made database that includes customers and sales for different months. The database is called BIT_DB and the sql code has been written in SQLiteStudio.
 
-#1. How many orders were placed in January? 
+#1. How many orders were placed in January? (filter out the blank and incorrect order IDs)
 SELECT COUNT(orderid) as 'Number of orders placed in January'
 FROM BIT_DB.JanSales
+WHERE length(orderid) = 6
+AND orderid <> 'Order ID';
 
-
-#2. How many of those orders were for an Apple Airpods Headphones? 
+#2. How many of those orders were for an Apple Airpods Headphones? (filter out the blank and incorrect order IDs)
 SELECT COUNT(orderid) as 'Apple Airpods Headphones Sales'
 FROM BIT_DB.JanSales
 WHERE Product='Apple Airpods Headphones'
+WHERE length(orderid) = 6
+AND orderid <> 'Order ID';
 
-
-#3. Select the customer account numbers for all the orders that were placed in January. 
+#3. Select the customer account numbers for all the orders that were placed in January. (filter out the blank and incorrect order IDs)
 SELECT distinct cust.acctnum as 'account number'
 FROM BIT_DB.customers as cust
 
 INNER JOIN BIT_DB.JanSales as Jan
 ON cust.order_id=FEB.orderid
-
+WHERE length(orderid) = 6
+AND orderid <> 'Order ID';
 
 #4. Which product was the cheapest one sold in February, and what was the price? 
 
@@ -40,11 +43,21 @@ FROM BIT_DB.MarSales
 WHERE location = '477 11th St, Seattle, WA 98101'
 GROUP BY product
 
-#7. How many customers ordered more than 2 products in February, and what was the average amount spent for those customers? 
-select 
+#7. How many customers ordered more than 2 products in February, and what was the average amount spent for those customers? (filter out the blank and incorrect order IDs)
+SELECT
 count(distinct cust.acctnum) as 'Number of Customers', 
 avg(quantity*price) as 'Average Amount Spent '
 FROM BIT_DB.FebSales Feb
 LEFT JOIN BIT_DB.customers cust
 ON FEB.orderid=cust.order_id
 WHERE Feb.Quantity>2
+AND length(orderid) = 6
+AND orderid <> 'Order ID';
+
+#8. All the products sold in Los Angeles in February and how many were sold
+SELECT Product, SUM(quantity) as 'Total sold'
+FROM BIT_DB.FebSales
+WHERE location like '%Los Angeles%'
+GROUP BY Product
+
+#9. 
