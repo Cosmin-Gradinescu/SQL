@@ -60,7 +60,7 @@ VALUES
 
 # Analysis: 
 
-# Categorizing based on maternity leave. 
+1) Categorizing based on maternity leave. 
 SELECT
 company_name,
 CASE 
@@ -72,7 +72,7 @@ FROM fortune_companies
 WHERE industry='Healthcare'
 ;
 
-# Company size 
+2) Company size 
 SELECT
 company_name,
 CASE 
@@ -83,7 +83,7 @@ FROM fortune_companies
 WHERE industry='Finance'
 ;
 
-# Average highest revenue industries rounded to 2 decimals
+3) Average highest revenue industries rounded to 2 decimals
 SELECT industry, ROUND(AVG(revenue),2) as avg_revenue
 FROM fortune_companies
 GROUP BY industry
@@ -96,13 +96,13 @@ WHERE paid_time_off_days>15
 AND healthcare_benefits=1
 ;
 
-# Highest revenue company in Technology
+4) Highest revenue company in Technology
 SELECT company_name, max(revenue)
 FROM fortune_companies
 WHERE industry = 'Technology'
 ;
 
-# Lowest revenue company in Healthcare that has at more than 3000 employees and under 300 revenue 
+5) Lowest revenue company in Healthcare that has at more than 3000 employees and under 300 revenue 
 SELECT company_name, min(revenue),employees
 FROM fortune_companies
 WHERE industry = 'Healthcare'
