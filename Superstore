@@ -29,16 +29,16 @@ VALUES
 
 
 
-#Show the average price of the items.
+1) Show the average price of the items.
 SELECT avg(price)
 FROM superstore;
 
-#Show the average price of a certain item
+2) Show the average price of a certain item
 SELECT avg(price)
 FROM superstore
 WHERE category= "Cutlery Set";
 
-#Use a SELECT statement to order the items by price and get the items that have the stock quantity >20.
+3) Use a SELECT statement to order the items by price and get the items that have the stock quantity >20.
 select 
 item_name,
 stock_quantity,
